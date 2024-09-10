@@ -19,7 +19,7 @@ router.post('/', withAuth, async (req,res) =>{
 
 router.get('/:post_id', withAuth, async (req,res) =>{
     try{
-        const post = await Post.findOne({where: {id: req.body.id}});
+        const post = await Post.findOne({where: {post_id: req.body.post_id}});
         if(!post){
             res
             .status(40)
@@ -36,7 +36,7 @@ router.get('/:post_id', withAuth, async (req,res) =>{
 router.put('/:post_id', withAuth, async (req,res) =>{
     try{
         Post.update({
-            id: req.body.id,
+            post_id: req.body.post_id,
             title: req.body.title,
             text: req.body.text,
             date_created: DataTypes.NOW,
@@ -55,7 +55,7 @@ router.delete('/:post_id', withAuth, async (req, res) => {
     try {
       const postData = await Post.destroy({
         where: {
-          id: req.params.id,
+          post_id: req.params.post_id,
           user_id: req.session.user_id,
         },
       });
@@ -72,16 +72,45 @@ router.delete('/:post_id', withAuth, async (req, res) => {
   });
 
 router.post('/:post_id/comment', withAuth, async (req,res) =>{
-    try{
-        const newPost = await Post.create({
-            ...req.body,
-            user_id: req.session.user_id
+    try {
+        const { post_id } = req.params;
+        const { text } = req.body;
+
+        // Create a new comment associated with the post
+        const newComment = await Comment.create({
+            
+            text,
+            post_id,
+            user_name: req.session.user_id,
         });
 
-        res.status(200).json(newPost);
-    } catch(err){
-        res.status(400).json(err);
+        const post = await Post.findOne({where: {id: post_id}});
+        let postComments = post.comments;
+
+        if(postComments=== null){
+            postComments = [newComment];
+        }
+        postComments.push(newComment);
+
+        
+
+        res.status(201).json(postComments);
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred while adding the comment.' });
     }
 });
+
+
+router.get("/:post_id/comments", withAuth, async (req, res ) =>{
+    try{
+        const { post_id } = req.params;
+        const comments = await Comment.findMany({where: {post_id: post_id }});
+        res.status(200).json(comments);
+    }
+    catch(err){
+        res.status(400).json(err);
+    }   
+});
+
 
 module.exports = router
