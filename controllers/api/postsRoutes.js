@@ -17,7 +17,7 @@ router.post('/', withAuth, async (req,res) =>{
     }
 });
 
-router.get('/:id', withAuth, async (req,res) =>{
+router.get('/:post_id', withAuth, async (req,res) =>{
     try{
         const post = await Post.findOne({where: {id: req.body.id}});
         if(!post){
@@ -33,7 +33,7 @@ router.get('/:id', withAuth, async (req,res) =>{
     }   
 });
 
-router.put('/:id', withAuth, async (req,res) =>{
+router.put('/:post_id', withAuth, async (req,res) =>{
     try{
         Post.update({
             id: req.body.id,
@@ -51,7 +51,7 @@ router.put('/:id', withAuth, async (req,res) =>{
 
 });
 
-router.delete('/:id', withAuth, async (req, res) => {
+router.delete('/:post_id', withAuth, async (req, res) => {
     try {
       const postData = await Post.destroy({
         where: {
@@ -71,7 +71,7 @@ router.delete('/:id', withAuth, async (req, res) => {
     }
   });
 
-router.post('/:comment', withAuth, async (req,res) =>{
+router.post('/:post_id/comment', withAuth, async (req,res) =>{
     try{
         const newPost = await Post.create({
             ...req.body,
