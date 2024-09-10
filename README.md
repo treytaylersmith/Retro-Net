@@ -1,11 +1,17 @@
 # Retro-Net
 An old school forum for all your nostalgic needs on the Information Super Highway
 
-## Objective
-To showcase the simplicity and beauty of the old-fashioned internet forums
+It showcases the simplicity and beauty of the old-fasiond internet forums by:
 
-### How it is done
-It basically is like any forum website that allows you to post any sort of comment that you want.
+- Creating and Uploading posts.
+- Commenting on posts.
 
-#### Example
-"Hello World this is my first post."
+This is done like with any forumn website that allows you to post any type of content that you want.
+
+Some examples include:
+
+- "Hello World this is my first post"
+- "I agree/disagree with you opinion"
+- "Here are some opinions that I want to share"
+
+## See Also
