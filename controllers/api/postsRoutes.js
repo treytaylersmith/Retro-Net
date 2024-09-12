@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 const {  DataTypes } = require("sequelize");
 
@@ -19,7 +19,7 @@ router.post('/', withAuth, async (req,res) =>{
 
 router.get('/:post_id', withAuth, async (req,res) =>{
     try{
-        const post = await Post.findOne({where: {post_id: req.body.post_id}});
+        const post = await Post.findOne({where: {post_id: req.params.post_id}});
         if(!post){
             res
             .status(40)
@@ -36,7 +36,7 @@ router.get('/:post_id', withAuth, async (req,res) =>{
 router.put('/:post_id', withAuth, async (req,res) =>{
     try{
         Post.update({
-            post_id: req.body.post_id,
+            post_id: req.params.post_id,
             title: req.body.title,
             text: req.body.text,
             date_created: DataTypes.NOW,

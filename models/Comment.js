@@ -22,15 +22,15 @@ Comment.init(
     post_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: "post",
-        key: "post_id",
+        model: 'posts',
+        key: 'post_id',
       },
     },
     user_name: {
       type: DataTypes.STRING,
       references: {
-        model: "user",
-        key: "name",
+        model: 'user',
+        key: 'user_name',
       },
     },
   },
@@ -38,7 +38,7 @@ Comment.init(
     sequelize,
     timestamps: true,
     underscored: true,
-    modelName: "comment",
+    modelName: 'comment',
   }
 );
 module.exports = Comment;
