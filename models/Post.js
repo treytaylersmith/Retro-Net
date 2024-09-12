@@ -26,17 +26,11 @@ Post.init(
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: "user",
-        key: "id",
+        model: 'user',
+        key: 'id',
       },
     },
-    user_name: {
-      type: DataTypes.STRING,
-      references: {
-        model: "user",
-        key: "user_name",
-      },
-    },
+
     comments: {
       type: DataTypes.ARRAY(DataTypes.JSON),
     },
@@ -45,7 +39,7 @@ Post.init(
     sequelize,
     timestamps: true,
     underscored: true,
-    modelName: "post",
+    modelName: 'posts',
   }
 );
 module.exports = Post;
