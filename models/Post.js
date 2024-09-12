@@ -34,7 +34,7 @@ Post.init(
       type: DataTypes.STRING,
       references: {
         model: "user",
-        key: "name",
+        key: "user_name",
       },
     },
     comments: {
