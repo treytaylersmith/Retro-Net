@@ -16,9 +16,9 @@ const loginForm = async (event) => {
   const signupForm = async (event) => {
     event.preventDefault();
   
-    const name = document.querySelector('#user_name').value.trim();
-    const email = document.querySelector('#').value.trim();
-    const password = document.querySelector('#').value.trim();
+    const name = document.querySelector('#name').value.trim();
+    const email = document.querySelector('#email').value.trim();
+    const password = document.querySelector('#password').value.trim();
   
     if (name && email && password) {
       const response = await fetch('/api/users', {
@@ -30,10 +30,10 @@ const loginForm = async (event) => {
   };
   
   document
-    .querySelector('.')
+    .querySelector('#log-in-form')
     .addEventListener('submit', loginForm);
   
   document
-    .querySelector('.')
+    .querySelector('#sign-up-form')
     .addEventListener('submit', signupForm);
   
