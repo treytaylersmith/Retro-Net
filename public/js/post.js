@@ -1,8 +1,9 @@
 const makePost = async (event) => {
   event.preventDefault();
+  console.log("foo")
 
-  const title = document.querySelector("#").value.trim();
-  const content = document.querySelector("#").value.trim();
+  const title = document.querySelector("#title").value.trim();
+  const content = document.querySelector("#content").value.trim();
 
   if (title && content) {
     const response = await fetch("/api/posts/", {
@@ -12,37 +13,12 @@ const makePost = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace("/forum");
+      document.location.replace("/comment");
     } else {
       alert(response.statusText);
     }
   } else {
     window.alert("Please enter both a title and a body");
-  }
-};
-
-const makeComment = async (event) => {
-  event.preventDefault();
-
-  if (event.target.hasAttribute("data-post-id")) {
-    
-    const id = event.target.getAttribute("data-post-id");
-
-    const content = document.querySelector("#").value.trim();
-
-    if (content) {
-      const response = await fetch(`api/posts/${id}/comment`, {
-        method: "POST",
-        body: JSON.stringify({ content }),
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (response.ok) {
-        document.location.replace("/post");
-      } else {
-        alert(response.statusText);
-      }
-    } 
   }
 };
 
@@ -63,14 +39,12 @@ const delButtonHandler = async (event) => {
   };
 
 document
-  .querySelector('.')
-  .addEventListener('sumbit', makePost);
-
-document
-  .querySelector('.')
-  .addEventListener('sumbit', makeComment);
+  .querySelector('#postForm')
+  .addEventListener('submit', makePost);
 
 
-document
-  .querySelector('.')
-  .addEventListener('click', delButtonHandler);
+
+
+// document
+//   .querySelector('.')
+//   .addEventListener('click', delButtonHandler);
