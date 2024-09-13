@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, Comment } = require('../../models');
+
 const withAuth = require('../../utils/auth');
 const {  DataTypes } = require("sequelize");
 
@@ -10,12 +11,37 @@ router.post('/', withAuth, async (req,res) =>{
             ...req.body,
             user_id: req.session.user_id
         });
-
+    
+        
         res.status(200).json(newPost);
+        console.log('Post Successfully added');
     } catch(err){
         res.status(400).json(err);
     }
 });
+
+router.get('/',  async (req, res) =>{
+    try{
+        const posts = await Post.findAll({
+            include:
+            [{
+                model: Comment,
+                
+            }]
+        });
+        if(!posts){
+            res
+            .status(40)
+            .json( {message: 'No posts exist'});
+            return;
+        }
+        res.status(200).json(posts);
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).json(err)
+    }
+})
 
 router.get('/:post_id', withAuth, async (req,res) =>{
     try{
@@ -84,18 +110,16 @@ router.post('/:post_id/comment', withAuth, async (req,res) =>{
             user_name: req.session.user_id,
         });
 
-        const post = await Post.findOne({where: {id: post_id}});
-        let postComments = post.comments;
-
-        if(postComments=== null){
-            postComments = [newComment];
-        }
-        postComments.push(newComment);
-
+        const post = await Post.findOne({
+            where: { post_id: post_id }, // Make sure to use the correct field for the primary key
+            include: [Comment] // This will include comments in the response if needed
+        });
+    
         
 
-        res.status(201).json(postComments);
-    } catch (error) {
+        res.status(200).json(post);
+    } catch (err) {
+        console.log(err);
         res.status(500).json({ error: 'An error occurred while adding the comment.' });
     }
 });

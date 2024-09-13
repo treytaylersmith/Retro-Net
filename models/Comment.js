@@ -26,6 +26,7 @@ Comment.init(
         key: 'post_id',
       },
     },
+  
     user_name: {
       type: DataTypes.STRING,
       references: {

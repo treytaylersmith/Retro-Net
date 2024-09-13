@@ -30,10 +30,6 @@ Post.init(
         key: 'id',
       },
     },
-
-    comments: {
-      type: DataTypes.ARRAY(DataTypes.JSON),
-    },
   },
   {
     sequelize,
