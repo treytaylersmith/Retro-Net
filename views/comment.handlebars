@@ -1,0 +1,20 @@
+<h2>{{post.title}}</h2>
+<p>{{post.content}}</p>
+
+<h3>Comments</h3>
+<ul>
+    {{#each comments}}
+        <li>{{this.author}}: {{this.text}}</li>
+    {{/each}}
+</ul>
+
+<h3>Add a Comment</h3>
+<form action="/post/{{post.id}}/comments" method="POST">
+    <label for="author">Name:</label>
+    <input type="text" id="author" name="author" required>
+    
+    <label for="text">Comment:</label>
+    <textarea id="text" name="text" rows="4" required></textarea>
+    
+    <button type="submit">Submit Comment</button>
+</form>
