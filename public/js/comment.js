@@ -1,14 +1,10 @@
 const commentForm = document.querySelector('#comment-form');
 const id = commentForm.getAttribute("data-postId");
   
-
+// Handler that creates comment
 const makeComment = async (event) => {
     event.preventDefault();
-  
-    
-      
-      
-  
+
       const text = document.querySelector("#text").value.trim();
 
 

@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Post, User, Comment } = require("../models");
-const withAuth = require("../utils/auth");
 
+// Main page
 router.get("/", async (req, res) => {
   try {
     
@@ -28,6 +28,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Post specific pages, displaying comments
 router.get('/post/:id', async (req, res) => {
   try {
     const commentData = await Post.findByPk(req.params.id, {
@@ -39,9 +40,10 @@ router.get('/post/:id', async (req, res) => {
         }
       ],
     });
-    //console.log(commentData);
+    //console.log(commentData);   // Console log for testing purposes
+
     const post = commentData.get({ plain: true });
-    //console.log(post);
+    //console.log(post);          // Console log for testing purposes
 
     res.render('comment', {
       post,
@@ -53,6 +55,7 @@ router.get('/post/:id', async (req, res) => {
   }
 });
 
+// Login page
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {

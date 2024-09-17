@@ -23,6 +23,8 @@ Post.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+
+    // Reference to user who created post
     user_id: {
       type: DataTypes.INTEGER,
       references: {

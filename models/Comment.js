@@ -19,6 +19,8 @@ Comment.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+
+    // Reference to specific post
     post_id: {
       type: DataTypes.INTEGER,
       references: {
