@@ -1,17 +1,24 @@
 <h2>Forum</h2>
-<ul>
-    {{#each posts}}
-        <li>{{this.title}} - <a href="/post/{{this.id}}">View Post</a></li>
-    {{/each}}
-</ul>
-<h2>Create a New Post</h2>
-    <form id = "postForm">
-      <label for="title">Title:</label>
-      <input type="text" id="title" name="title" required />
+{{#if logged_in}}
+    <div>
+        <ul>
+            {{#each posts}}
+                <li>{{this.title}} - <a href="/post/{{this.id}}">View Post</a></li>
+            {{/each}}
+        </ul>
+        <h2>Create a New Post</h2>
+            <form id = "postForm">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required />
 
-      <label for="content">Content:</label>
-      <textarea id="content" name="content" rows="4" required></textarea>
+            <label for="content">Content:</label>
+            <textarea id="content" name="content" rows="4" required></textarea>
 
-      <button type="submit">Submit Post</button>
-</form>
+            <button type="submit">Submit Post</button>
+        </form>
+    </div>
+{{else}}
+    <a href="/login" class="no-button">Login/Sign Up</a>
+{{/if}}
+
 <script src="/js/post.js"></script>
