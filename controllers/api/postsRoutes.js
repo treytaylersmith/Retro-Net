@@ -12,7 +12,8 @@ router.post('/', withAuth, async (req,res) =>{
             user_id: req.session.user_id
         });
     
-        
+        console.log(newPost);
+
         res.status(200).json(newPost);
         console.log('Post Successfully added');
     } catch(err){
@@ -101,6 +102,7 @@ router.post('/:id/comment', withAuth, async (req,res) =>{
     try {
         const post_id = req.params.id;
         const { text } = req.body;
+        console.log(post_id + " " + text);
 
         // Create a new comment associated with the post
         const newComment = await Comment.create({
@@ -110,8 +112,7 @@ router.post('/:id/comment', withAuth, async (req,res) =>{
             user_name: req.session.user_id,
         });
 
-    
-        
+       
 
         res.status(200).json(newComment);
     } catch (err) {

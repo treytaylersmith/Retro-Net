@@ -3,17 +3,20 @@ const makePost = async (event) => {
   console.log("foo")
 
   const title = document.querySelector("#title").value.trim();
-  const content = document.querySelector("#content").value.trim();
-
-  if (title && content) {
+  const text = document.querySelector("#content").value.trim();
+  
+  if (title && text) {
+    console.log(JSON.stringify({ title, text }));
     const response = await fetch("/api/posts/", {
       method: "POST",
-      body: JSON.stringify({ title, content }),
+      body: JSON.stringify({ title, text }),
       headers: { "Content-Type": "application/json" },
     });
+    const data = await response.json();
+    // console.log(data);
 
     if (response.ok) {
-      document.location.replace("/comment");
+     document.location.replace(`/post/${data.id}`);
     } else {
       alert(response.statusText);
     }

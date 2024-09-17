@@ -1,30 +1,33 @@
+const commentForm = document.querySelector('#comment-form');
+const id = commentForm.getAttribute("data-postId");
+  
 
-  const makeComment = async (event) => {
+const makeComment = async (event) => {
     event.preventDefault();
   
-    if (event.target.hasAttribute("data-post-id")) {
+    
       
-      const id = event.target.getAttribute("data-post-id");
+      
   
-      const content = document.querySelector("#").value.trim();
-  
-      if (content) {
-        const response = await fetch(`api/posts/${id}/comment`, {
+      const text = document.querySelector("#text").value.trim();
+
+
+      console.log(id);
+      if (text) {
+        const response = await fetch(`/api/posts/${id}/comment`, {
           method: "POST",
-          body: JSON.stringify({ content }),
+          body: JSON.stringify({ text }),
           headers: { "Content-Type": "application/json" },
         });
   
         if (response.ok) {
-          document.location.replace("/post");
+         document.location.replace(`/post/${id}`);
         } else {
           alert(response.statusText);
         }
       } 
-    }
+    
   };
 
   
-  document
-  .querySelector('#comment-form')
-  .addEventListener('submit', makeComment);
+ commentForm.addEventListener('submit', makeComment);
