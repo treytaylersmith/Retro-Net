@@ -13,6 +13,11 @@
       "user_name": "Amiko",
       "email": "amiko2k20@aol.com",
       "password": "password12345"
+    },
+    {
+      "user_name": "admin",
+      "email": "email@email.com",
+      "password": "password"
     }
     
   ]
