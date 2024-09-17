@@ -14,4 +14,10 @@ Some examples include:
 - "I agree/disagree with you opinion"
 - "Here are some opinions that I want to share"
 
+## How to access Retro-Net
+
+It is a free-to-access webite link in the description below
+
+
+
 ## See Also
