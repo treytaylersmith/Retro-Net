@@ -1,21 +1,22 @@
 [
-    {
-      
-      "title": "cool motorcycles",
-      "text": "i think they're neat"
-       
-    },
-    {
-      
-        "title": "fun tv shows",
-        "text": "doctor who"
-         
-    },
-    {
-    
-        "title": "cool guy here, ask me anything",
-        "text": "i'm super duper cool, just ask my mom"
-        
-    }
-  ]
-  
+  {
+    "title": "Cool Motorcycles",
+    "text": "i think they're neat"
+  },
+  {
+    "title": "Fun Tv Shows",
+    "text": "doctor who"
+  },
+  {
+    "title": "cool guy here, ask me anything",
+    "text": "i'm super duper cool, just ask my mom"
+  },
+  {
+    "title": "Cooler guy here, ask me more than you asked the last guy",
+    "text": "His mom thinks i'm cooler, she said so"
+  },
+  {
+    "title": "I once ate a pebble and I don't know where it went",
+    "text": "I guess you could say I rock"
+  }
+]
