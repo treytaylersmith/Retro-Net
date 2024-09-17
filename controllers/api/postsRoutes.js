@@ -4,7 +4,7 @@ const { Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 const {  DataTypes } = require("sequelize");
 
-
+// Create a new post
 router.post('/', withAuth, async (req,res) =>{
     try{
         const newPost = await Post.create({
@@ -12,15 +12,17 @@ router.post('/', withAuth, async (req,res) =>{
             user_id: req.session.user_id
         });
     
-        console.log(newPost);
+        // console.log(newPost); //Uncomment for testing purposes
 
         res.status(200).json(newPost);
         console.log('Post Successfully added');
     } catch(err){
+        console.log(err);
         res.status(400).json(err);
     }
 });
 
+// Get all posts
 router.get('/',  async (req, res) =>{
     try{
         const posts = await Post.findAll({
@@ -30,6 +32,7 @@ router.get('/',  async (req, res) =>{
                 
             }]
         });
+
         if(!posts){
             res
             .status(40)
@@ -44,6 +47,7 @@ router.get('/',  async (req, res) =>{
     }
 })
 
+// Get a specific post by its id
 router.get('/:id', withAuth, async (req,res) =>{
     try{
         const post = await Post.findOne({where: {id: req.params.id}});
@@ -56,20 +60,25 @@ router.get('/:id', withAuth, async (req,res) =>{
         res.status(200).json(post);
     }
     catch(err){
+        console.log(err);
         res.status(400).json(err);
     }   
 });
 
+// Update a post UNIMPLEMENTED
 router.put('/:id', withAuth, async (req,res) =>{
     try{
+        
         Post.update({
-            id: req.params.id,
-            title: req.body.title,
+           
             text: req.body.text,
             date_created: DataTypes.NOW,
-            user_id: req.body.user_id,
-            user_name: req.body.user_name,
-            comments: req.body.comments,
+           
+        },
+        {
+            where: {
+                id: req.params.id,
+            }
         });
     }
     catch(err){
@@ -78,6 +87,7 @@ router.put('/:id', withAuth, async (req,res) =>{
 
 });
 
+// Delete a post UNIMPLEMENTED
 router.delete('/:id', withAuth, async (req, res) => {
     try {
       const postData = await Post.destroy({
@@ -98,6 +108,7 @@ router.delete('/:id', withAuth, async (req, res) => {
     }
   });
 
+// Create a comment, linked to a specific post
 router.post('/:id/comment', withAuth, async (req,res) =>{
     try {
         const post_id = req.params.id;
@@ -121,7 +132,7 @@ router.post('/:id/comment', withAuth, async (req,res) =>{
     }
 });
 
-
+// Get all comments, used for testing comments
 router.get("/:id/comments", withAuth, async (req, res ) =>{
     try{
         const { id } = req.params;
